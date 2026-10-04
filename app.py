@@ -167,7 +167,9 @@ with header_col:
 
 with button_col:
 
-    send_disabled = len(st.session_state.messages) <= 2
+    send_disabled = not any(
+    message["role"] == "user"
+    for message in st.session_state.messages)
 
     if st.button(
         "📧 Send Summary",
